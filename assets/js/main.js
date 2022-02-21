@@ -204,15 +204,11 @@
   });
 
   /**
-   * Testimonials slider
+   * Jointeam slider
    */
-  new Swiper('.testimonials-slider', {
+  new Swiper('.jointeam-slider', {
     speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
+    loop: false,
     slidesPerView: 'auto',
     pagination: {
       el: '.swiper-pagination',
@@ -222,12 +218,15 @@
     breakpoints: {
       320: {
         slidesPerView: 1,
-        spaceBetween: 20
+        spaceBetween: 10
       },
-
+      770: {
+        slidesPerView: 2,
+        spaceBetween: 10
+      },
       1200: {
         slidesPerView: 3,
-        spaceBetween: 20
+        spaceBetween: 10
       }
     }
   });

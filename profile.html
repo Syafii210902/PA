@@ -95,7 +95,7 @@
                                         <h3>My Account</h3>
                                     </div>
                                     <div class="col-6">
-                                            <a href=""><div class="top-button">Edit</div></a>
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#modalaccount"><div class="top-button" >Edit</div></a>
                                     </div>
                                 </div>
                             </div>
@@ -103,37 +103,81 @@
                                 <h4>USER INFORMATION</h4>
                                 <form action="" method="post">
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <p>Username</p>
                                             <input type="text" name="username" readonly>
                                         </div>
-                                        <div class="col-6">
-                                            <p>Email</p>
-                                            <input type="email" name="email" readonly>
+                                        <div class="col-md-6">
+                                            <p>Full Name</p>
+                                            <input type="text" name="fullname" readonly>
                                         </div>
-                                        <div class="col-6">
-                                            <p>Password</p>
-                                            <input type="password" name="password" readonly>
-                                        </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <p>Nrp</p>
                                             <input type="text" name="nrp" readonly>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <p>Kelas</p>
                                             <input type="text" name="kelas" readonly>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6">
                                             <p>Jurusan</p>
                                             <input type="text" name="jurusan" readonly>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-md-6">
                                             <p>About</p>
                                             <input type="text" name="about" readonly>
                                         </div>
                                     </div>
                                 </form>
                             </div>
+                            <section>
+                                <div class="modal fade" id="modalaccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="staticBackdropLabel">Account</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form>
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="username" class="col-form-label">Username</label>
+                                                    <input type="text" class="form-control" id="username">
+                                                    <label for="fullname" class="col-form-label">Full Name</label>
+                                                    <input type="text" class="form-control" id="fullname">
+                                                    <label for="nrp" class="col-form-label">NRP</label>
+                                                    <input type="text" class="form-control" id="nrp">
+                                                    <label for="kelas" class="col-form-label">Kelas</label>
+                                                    <input type="text" class="form-control" id="kelas">
+                                                    <label for="jurusan" class="col-form-label">Jurusan</label>
+                                                    <input type="text" class="form-control" id="jurusan">
+                                                    <label for="desc" class="col-form-label">About</label>
+                                                    <input type="text" class="form-control" id="desc">
+                                                    <label for="photoprofile" class="col-form-label">Photo Profile</label>
+                                                    <div class="file-upload">
+                                                        <div class="image-upload-wrap">
+                                                          <input class="file-upload-input" type='file' onchange="readURL(this);" id="photoprofile"/>
+                                                          <div class="drag-text">
+                                                            <h3>Add Image</h3>
+                                                          </div>
+                                                        </div>
+                                                        <div class="file-upload-content">
+                                                          <img class="file-upload-image" src="#" alt="your image" />
+                                                          <div class="image-title-wrap">
+                                                            <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </section>
                         </div>
                     </div>
                     <div class="prestasi">
@@ -144,7 +188,7 @@
                                         <h3>Prestasi</h3>
                                     </div>
                                     <div class="col-6">
-                                            <a href=""><div class="top-button">Add</div></a>
+                                            <a href="" class="join" data-bs-toggle="modal" data-bs-target="#modalprestasi"><div class="top-button">Add</div></a>
                                     </div>
                                 </div>
                             </div>
@@ -161,6 +205,52 @@
                             </div>
                         </div>
                     </div>
+                    <section>
+                        <div class="modal fade" id="modalprestasi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="staticBackdropLabel">Prestasi</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="nama-lomba" class="col-form-label">Nama Lomba</label>
+                                            <input type="text" class="form-control" id="nama-lomba">
+                                            <label for="kategori" class="col-form-label">Kategori</label>
+                                            <input type="text" class="form-control" id="kategori">
+                                            <label for="prestasi" class="col-form-label">Prestasi</label>
+                                            <input type="text" class="form-control" id="prestasi">
+                                            <label for="tingkat" class="col-form-label">Tingkat</label>
+                                            <input type="text" class="form-control" id="tingkat">
+                                            <label for="tahun" class="col-form-label">Prestasi</label>
+                                            <input type="text" class="form-control" id="tahun">
+                                            <label for="sertifikat" class="col-form-label">Sertifikat</label>
+                                            <div class="file-upload">
+                                                <div class="image-upload-wrap">
+                                                  <input class="file-upload-input" type='file' onchange="readURL(this);" />
+                                                  <div class="drag-text">
+                                                    <h3>upload FIle</h3>
+                                                  </div>
+                                                </div>
+                                                <div class="file-upload-content">
+                                                  <img class="file-upload-image" src="#" alt="your image" />
+                                                  <div class="image-title-wrap">
+                                                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                    </section>
                     <div class="pengalaman">
                         <div class="box">
                             <div class="top-card">
@@ -169,7 +259,7 @@
                                         <h3>Pengalaman</h3>
                                     </div>
                                     <div class="col-6">
-                                            <a href=""><div class="top-button">Add</div></a>
+                                            <a href="" class="join"data-bs-toggle="modal" data-bs-target="#modalpengalaman"><div class="top-button">Add</div></a>
                                     </div>
                                 </div>
                             </div>
@@ -187,6 +277,33 @@
                             </div>
                         </div>
                     </div>
+                    <section>
+                        <div class="modal fade" id="modalpengalaman" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="staticBackdropLabel">Pengalaman</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="nama-kegiatan" class="col-form-label">Nama Kegiatan</label>
+                                            <input type="text" class="form-control" id="nama-kegiatan">
+                                            <label for="jabatan" class="col-form-label">Jabatan</label>
+                                            <input type="text" class="form-control" id="jabatan">
+                                            <label for="tahun" class="col-form-label">Tahun</label>
+                                            <input type="text" class="form-control" id="tahun">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                    </section>
                     <div class="lowongan">
                         <div class="box">
                             <div class="top-card">
@@ -221,7 +338,7 @@
                                             <img src="assets/img/pp.jpg" alt="">
                                         </div>
                                         <div class="col-4" >
-                                            <a href="">Information Technology Creative Competition</a>
+                                            <a href="">Syafi'i</a>
                                         </div>
                                         <div class="col-4 text-center" style="margin: auto 0;">
                                             <p>081231129214</p>
@@ -424,6 +541,22 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#switch").click(function(){
+                if ($(this).is(":checked")) {
+                    //alert("Hello! I am an alert box!!");
+                    //push data to database
+                }
+                else{
+                    //push data to database
+                }
+            })
+        })
+    </script>
 
 </body>
 
