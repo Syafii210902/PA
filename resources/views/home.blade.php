@@ -1,4 +1,3 @@
-{{-- @dd($juara_tims[0]); --}}
 @extends('layout.app')
 
 @section('content')
