@@ -46,14 +46,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(JuaraIndividu::class, 'user_id');
     }
-
+    public function pengalamans()
+    {
+        return $this->hasMany(Pengalaman::class, 'user_id');
+    }
     public function kegiatans()
     {
         return $this->hasMany(Kegiatan::class, 'user_id');
     }
 
-    public function joinKegiatans(){
-        return $this->belongsToMany(Kegiatan::class, 'join_kegiatan', 'user_id', 'kegiatan_id');
+    public function joinDivisis(){
+        return $this->belongsToMany(DivisiKegiatan::class, 'join_divisis', 'divisi_id', 'user_id')->withPivot('pilihan1', 'pilihan2', 'status1', 'status2');
     }
 
     public function lombas()

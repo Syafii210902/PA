@@ -1536,7 +1536,21 @@ body {
     border-radius: 50%;
     padding: 20px;
   }
+  
+  .bottom .report .box{
+    background: #14487A;
+    color: #ffffff;
+  }
+  
+  .bottom .report .box:hover{
+    background: #2774bd;
+  }
 
+  .bottom .report .box p{
+    font-size: 22px;
+    letter-spacing: 3px;
+    margin: auto 0;
+  }
   .bottom .box{
     border-radius: 5px;
     background-color: #F8F9FB;
@@ -1564,6 +1578,10 @@ body {
     text-align: center;
     padding: 2px;
     margin-right: 20px;
+  }
+
+  .bottom .box .top-card .top-button:hover{
+    background: #2774bd;
   }
   .bottom .top-card a{
     color: #fff;
@@ -1775,6 +1793,7 @@ body {
   }
 
   .detail-lomba .form-box input[type=text],
+  .detail-lomba .form-box select,
   .detail-lomba .form-box textarea
   {
     width: 100%;
@@ -1900,4 +1919,17 @@ body {
   .remove-image:active {
     border: 0;
     transition: all .2s ease;
+  }
+
+  #modalReport p{
+    font-family: 'Open Sans', sans-serif; 
+    letter-spacing: 3px; 
+    font-weight: 600;
+    font-size: 20px;
+    color:  gray;
+  }
+
+  #modalReport p:hover{
+    background: #2774bd;
+    color: #ffffff;
   }

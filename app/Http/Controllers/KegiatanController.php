@@ -6,6 +6,7 @@ use App\Models\Kegiatan;
 use App\Models\KategoriKegiatan;
 use App\Http\Requests\StoreKegiatanRequest;
 use App\Http\Requests\UpdateKegiatanRequest;
+use App\Models\DivisiKegiatan;
 
 class KegiatanController extends Controller
 {
@@ -53,7 +54,8 @@ class KegiatanController extends Controller
     {
         return view('detail-kegiatan', [
             "tittle" => "Detail Kegiatan",
-            "kegiatan" => $kegiatan::with('kategori')->where('id', $kegiatan->id)->latest()->get()
+            "kegiatan" => $kegiatan::with('kategori')->where('id', $kegiatan->id)->latest()->get(),
+            "divisis" => DivisiKegiatan::with('kegiatan')->where('kegiatan_id', $kegiatan->id)->get()
         ]);
     }
 

@@ -11,6 +11,7 @@ use App\Models\Lomba;
 use App\Models\Kegiatan;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
 use Symfony\Component\Console\Input\Input;
 
 /*
@@ -23,6 +24,17 @@ use Symfony\Component\Console\Input\Input;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index']);
+    Route::get('/lomba/list', [AdminController::class, 'getLomba']);
+    Route::get('/lomba/add', [AdminController::class, 'addLomba']);
+    Route::get('/kegiatan/list', [AdminController::class, 'getKegiatan']);
+    Route::get('/kegiatan/add', [AdminController::class, 'addKegiatan']);
+    Route::get('/prestasi/list', [AdminController::class, 'getPrestasi']);
+    Route::get('/prestasi/validasi/individu', [AdminController::class, 'getPrestasiIndividu']);
+    Route::get('/prestasi/validasi/kelompok', [AdminController::class, 'getPrestasiTim']);
+});
 
 Route::get('/', function () {
     return view('home', [

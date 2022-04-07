@@ -19,7 +19,7 @@ class Kegiatan extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function users(){
-        return $this->belongsToMany(User::class, 'join_kegiatan', 'user_id', 'kegiatan_id');
+    public function divisis(){
+        return $this->hasMany(DivisiKegiatan::class, 'kegiatan_id');
     }
 }

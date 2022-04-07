@@ -88,20 +88,7 @@
                                                     <label for="desc" class="col-form-label">About</label>
                                                     <input type="text" class="form-control" value="{{ $user[0]->mahasiswa->bio }}" id="desc">
                                                     <label for="photoprofile" class="col-form-label">Photo Profile</label>
-                                                    <div class="file-upload">
-                                                        <div class="image-upload-wrap">
-                                                          <input class="file-upload-input" type='file' onchange="readURL(this);" id="photoprofile"/>
-                                                          <div class="drag-text">
-                                                            <h3>Add Image</h3>
-                                                          </div>
-                                                        </div>
-                                                        <div class="file-upload-content">
-                                                          <img class="file-upload-image" src="#" alt="your image" />
-                                                          <div class="image-title-wrap">
-                                                            <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
-                                                          </div>
-                                                        </div>
-                                                    </div>
+                                                    <input type="file" class="form-control" name="photoprofile" id="photoprofile" required>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -139,6 +126,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- Modal Prestasi --}}
                     <section>
                         <div class="modal fade" id="modalprestasi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -151,30 +139,17 @@
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <label for="nama-lomba" class="col-form-label">Nama Lomba</label>
-                                            <input type="text" class="form-control" id="nama-lomba">
+                                            <input type="text" class="form-control" id="nama-lomba" required>
                                             <label for="kategori" class="col-form-label">Kategori</label>
                                             <input type="text" class="form-control" id="kategori">
                                             <label for="prestasi" class="col-form-label">Prestasi</label>
-                                            <input type="text" class="form-control" id="prestasi">
+                                            <input type="text" class="form-control" id="prestasi" required>
                                             <label for="tingkat" class="col-form-label">Tingkat</label>
-                                            <input type="text" class="form-control" id="tingkat">
-                                            <label for="tahun" class="col-form-label">Prestasi</label>
-                                            <input type="text" class="form-control" id="tahun">
+                                            <input type="text" class="form-control" id="tingkat" required>
+                                            <label for="tahun" class="col-form-label">Tahun</label>
+                                            <input type="text" class="form-control" id="tahun" required>
                                             <label for="sertifikat" class="col-form-label">Sertifikat</label>
-                                            <div class="file-upload">
-                                                <div class="image-upload-wrap">
-                                                  <input class="file-upload-input" type='file' onchange="readURL(this);" />
-                                                  <div class="drag-text">
-                                                    <h3>upload FIle</h3>
-                                                  </div>
-                                                </div>
-                                                <div class="file-upload-content">
-                                                  <img class="file-upload-image" src="#" alt="your image" />
-                                                  <div class="image-title-wrap">
-                                                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
-                                                  </div>
-                                                </div>
-                                            </div>
+                                            <input type="file" class="form-control" name="sertifikat" id="sertifikat" required>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -185,6 +160,7 @@
                             </div>
                           </div>
                     </section>
+                    {{-- End Modal Prestasi --}}
                     <div class="pengalaman">
                         <div class="box">
                             <div class="top-card">
@@ -302,12 +278,17 @@
                 <div class="col-lg-4">
                     <div class="bio">
                         <div class="bio-box">
-                            <img src="{{asset('assets/img/'.$user[0]->photo_profile)}}" alt="">
+                            <img src="{{url(Auth::user()->image ?? 'assets/img/pp.png')}}" alt="">
                             <p style="font-weight: 600; font-size: 24px;">{{ $user[0]->mahasiswa->full_name }}</p>
                             <p>{{ $user[0]->mahasiswa->nrp }}</p>
                             <p>{{ $user[0]->mahasiswa->kelas }}</p>
                             <p style="text-transform: uppercase; font-weight: bold; font-size: 20px;">{{ $user[0]->mahasiswa->jurusan }}</p>
                             <p style="font-size: 18px;">{{ $user[0]->mahasiswa->bio }}</p>
+                        </div>
+                    </div>
+                    <div class="report mt-4 text-center " >
+                        <div class="box p-4" data-bs-toggle="modal" data-bs-target="#modalReport">
+                            <p><i class="bx bxs-trophy"></i> REPORT</p>
                         </div>
                     </div>
                     <div class="mykegiatan">
@@ -330,36 +311,29 @@
                                 </div>
                             </div>
                             <div class="group">
-                                <div class="body-card item-group" style="background-color: #fff;">
-                                    <div class="row">
-                                        <div class="col-9">
-                                            <a href="">Information Technology Creative Competition</a>
-                                        </div>
-                                        <div class="col-3 text-center" style="margin: auto 0;">
-                                            <p>Diterima</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="body-card item-group" style="background-color: #fff;">
-                                    <div class="row">
-                                        <div class="col-9">
-                                            <a href="">Information Technology Creative Competition</a>
-                                        </div>
-                                        <div class="col-3 text-center" style="margin: auto 0;">
-                                            <p>Ditolak</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="body-card item-group" style="background-color: #fff;">
-                                    <div class="row">
-                                        <div class="col-9">
-                                            <a href="">Information Technology Creative Competition</a>
-                                        </div>
-                                        <div class="col-3 text-center" style="margin: auto 0;">
-                                            <p>Diterima</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                {{-- Belum ditambahkan kondisi diterima di divisi apa berdasarkan status1/status2 --}}
+                                @foreach($accepted_divisis as $accepted_divisi)
+                                    @foreach($accepted_divisi->users->where('id', $user[0]->id) as $item)
+                                        @if($item->pivot->status1 === 1 or $item->pivot->status2 === 1)
+                                            <div class="body-card item-group" style="background-color: #fff;">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <a href="">{{ $accepted_divisi->kegiatan->nama_kegiatan }} - Divisi 
+                                                            @if($item->pivot->status1 === 1) 
+                                                                {{ $item->pivot->pilihan1 }}
+                                                                @else
+                                                                {{ $item->pivot->pilihan2 }}
+                                                            @endif
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-3 text-center" style="margin: auto 0;">
+                                                        <p>Diterima</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endforeach    
                             </div>
                         </div>
                     </div>
@@ -405,6 +379,92 @@
                 </div>
             </div>
         </div>
+    </section>
+    <section>
+        <div class="modal fade" id="modalReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Report Juara</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                        <div class="mb-3 text-center">
+                            <p class="form-control p-3" data-bs-toggle="modal" data-bs-target="#prestasiIndividu">INDIVIDU</p>
+                            <p class="form-control p-3" data-bs-toggle="modal" data-bs-target="#prestasiKelompok">TIM</p>
+                        </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+    </section>
+    <section>
+        <div class="modal fade" id="prestasiIndividu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Individu</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nama-lomba" class="col-form-label">Nama Lomba</label>
+                            <input type="text" class="form-control" id="nama-lomba" required>
+                            <label for="kategori" class="col-form-label">Kategori</label>
+                            <input type="text" class="form-control" id="kategori">
+                            <label for="prestasi" class="col-form-label">Prestasi</label>
+                            <input type="text" class="form-control" id="prestasi" required>
+                            <label for="tingkat" class="col-form-label">Tingkat</label>
+                            <input type="text" class="form-control" id="tingkat" required>
+                            <label for="tahun" class="col-form-label">Tahun</label>
+                            <input type="text" class="form-control" id="tahun" required>
+                            <label for="sertifikat" class="col-form-label">Sertifikat</label>
+                            <input type="file" class="form-control" id="sertifikat">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+    </section>
+    <section>
+        <div class="modal fade" id="prestasiKelompok" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Kelompok</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nama-tim" class="col-form-label">Nama Tim</label>
+                            <input type="text" class="form-control" id="nama-tim" required>
+                            <label for="nama-lomba" class="col-form-label">Nama Lomba</label>
+                            <input type="text" class="form-control" id="nama-lomba" required>
+                            <label for="kategori" class="col-form-label">Kategori</label>
+                            <input type="text" class="form-control" id="kategori">
+                            <label for="prestasi" class="col-form-label">Prestasi</label>
+                            <input type="text" class="form-control" id="prestasi" required>
+                            <label for="tingkat" class="col-form-label">Tingkat</label>
+                            <input type="text" class="form-control" id="tingkat" required>
+                            <label for="tahun" class="col-form-label">Tahun</label>
+                            <input type="text" class="form-control" id="tahun" required>
+                            <label for="sertifikat" class="col-form-label">Sertifikat</label>
+                            <input type="file" class="form-control" id="sertifikat">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
     </section>
     <!-- End Profile -->
 @endsection

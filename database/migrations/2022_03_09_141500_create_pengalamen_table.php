@@ -15,7 +15,7 @@ class CreatePengalamenTable extends Migration
     {
         Schema::create('pengalamen', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mahasiswa_id');
+            $table->foreignId('user_id');
             $table->string('nama_kegiatan');
             $table->string('jabatan');
             $table->string('tahun');

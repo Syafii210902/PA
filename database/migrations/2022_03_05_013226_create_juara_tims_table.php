@@ -19,6 +19,8 @@ class CreateJuaraTimsTable extends Migration
             $table->string('keterangan');
             $table->string('sertifikat');
             $table->integer('status');
+            $table->integer('tahun');
+            $table->string('type');
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
         });

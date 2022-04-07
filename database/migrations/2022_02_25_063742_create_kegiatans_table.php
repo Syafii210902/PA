@@ -24,15 +24,6 @@ class CreateKegiatansTable extends Migration
             $table->string('info');
             $table->timestamps();
         });
-
-        Schema::create('join_kegiatan', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('kegiatan_id');
-            $table->string('no_wa');
-            $table->integer('status');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -43,6 +34,5 @@ class CreateKegiatansTable extends Migration
     public function down()
     {
         Schema::dropIfExists('kegiatans');
-        Schema::dropIfExists('join_kegiatan');
     }
 }

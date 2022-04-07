@@ -17,7 +17,7 @@ class JuaraIndividuController extends Controller
     {
         return view('juara-individu', [
             "tittle" => "Juara",
-            "juara_individus" => JuaraIndividu::with(['lomba', 'user'])->latest()->get()
+            "juara_individus" => JuaraIndividu::with(['lomba', 'user'])->where('type', 'publish')->latest()->get()
         ]);
     }
 

@@ -11,8 +11,8 @@ class Pengalaman extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function mahasiswa()
+    public function user()
     {
-        return $this->belongsTo(Mahasiswa::class, 'pengalaman_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
