@@ -12,7 +12,7 @@
                                 <div class="col-lg-3 col-md-6 app" data-aos="zoom-in">
                                     <a href="/kegiatan/{{$kegiatan->kategori->nama_kategori.'/'.$kegiatan->id}}">
                                         <div class="kegiatan-box">
-                                            <img src="{{asset('assets/img/'.$kegiatan->poster)}}" alt="">
+                                            <img src="{{asset('storage/'.$kegiatan->poster)}}" alt="">
                                             <div class="desc">
                                                 <h3>{{$kegiatan->nama_kegiatan}}</h3>
                                                 <p>{{$kegiatan->deadline}}</p>

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8" data-aos="fade-up">
-                    <img src="{{asset('assets/img/'.$kegiatan[0]->poster)}}" alt="">
+                    <img src="{{asset('storage/'.$kegiatan[0]->poster)}}" alt="">
                     <h4>{{$kegiatan[0]->nama_kegiatan}}</h4>
                     <h5>Deskripsi</h5>
                     <p>{{$kegiatan[0]->deskripsi}}</p>
@@ -17,21 +17,25 @@
                 </div>
                 <div class="col-lg-4 form-box" data-aos="fade-up">
                     <h3>Join Kegiatan</h3>
-                    <form action="" method="post">
+                    <form action="/joindivisi" method="POST">
+                        @csrf
+                        <input type="hidden" name="kegiatan_id" value="{{ $kegiatan[0]->id }}">
                         <p>Pilihan 1</p>
                         <select name="pilihan1" id="pilihan1" required>
                             <option value="" disabled selected>Select Division</option>
-                            <option value="">Nama Divisi</option>
-                            <option value="">Nama Divisi2</option>
+                            @foreach($divisis as $divisi)
+                                <option value="{{ $divisi->id }}">{{ $divisi->nama_divisi }}</option>
+                            @endforeach
                         </select>
                         <p>Pilihan 2</p>
                         <select name="pilihan2" id="pilihan2">
                             <option value="" selected>Select Division</option>
-                            <option value="">Nama Divisi</option>
-                            <option value="">Nama Divisi2</option>
+                            @foreach($divisis as $divisi)
+                                <option value="{{ $divisi->id }}">{{ $divisi->nama_divisi }}</option>
+                            @endforeach
                         </select>
                         <p>No. Whatsapp</p>
-                        <input type="text" name="no_whatsapp" placeholder="Whatsapp Number" required>
+                        <input type="text" name="no_wa" placeholder="Whatsapp Number" required>
                         <input type="submit">
                     </form>
                 </div>
@@ -58,8 +62,8 @@
                                                             <td>Pendaftar</td>
                                                             <td><strong>
                                                                 {{ 
-                                                                    DB::table('join_divisis')->where(function($query) use($divisi){ $query->where('pilihan1', '=', $divisi->nama_divisi)
-                                                                        ->orWhere('pilihan2', '=', $divisi->nama_divisi);
+                                                                    DB::table('join_divisis')->where(function($query) use($divisi){ $query->where('pilihan1', $divisi->nama_divisi)
+                                                                        ->orWhere('pilihan2', $divisi->nama_divisi);
                                                                     })->count(); 
                                                                 }}</strong></td>
                                                         </tr>
@@ -81,7 +85,6 @@
                 </div>
             </div>
         </div>
-
     </section>
     <!-- End Hero -->
 @endsection

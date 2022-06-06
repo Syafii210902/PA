@@ -36,7 +36,7 @@
                         <td style="text-align: justify">{{ $kegiatan->deskripsi }}</td>
                         <td>{{ $kegiatan->deadline }}</td>
                         <td>{{ $kegiatan->info }}</td>
-                        <td><img src="{{ asset('assets/img/'.$kegiatan->poster) }}" alt="" style="width: 100px;"></td>
+                        <td><img src="{{ asset('storage/'.$kegiatan->poster) }}" alt="" style="width: 100px;"></td>
                         <td>
                         <a href="" data-toggle="modal" data-target="#modalEdit-{{ $kegiatan->id }}" style="font-size: 20px; margin-left: 10px;"><i class="fa fa-edit"></i></a>
                         <a href="" style="font-size: 20px; margin-left: 10px;"><i class="fa fa-trash"></i></a>

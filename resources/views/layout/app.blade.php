@@ -24,18 +24,22 @@
     <link href="{{asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
     
-
     <!-- Template Main CSS File -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
 
+    <!-- Ajax -->
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" /> --}}
 </head>
 
-<body class="{{ ($tittle === "Home") ? 'index-body' : ''}}">
-
-    @include('partial.nav')
-    @yield('content')
-    @include('partial.footer')
-
+<body class="{{ ($tittle === "Home") ? 'index-body' : ''}}{{($tittle === "Login") ? 'login-body' : ''}}">
+    @if ($tittle != "Login")
+        @include('partial.nav')
+        @yield('content')
+        @include('partial.footer')
+    @else
+        @yield('login')
+    @endif
+    
 </body>
 
 <!-- Vendor JS Files -->
@@ -45,6 +49,8 @@
 <script src="{{asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
 <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
 <script src="{{asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+{{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script> --}}
 
 <!-- Template Main JS File -->
 <script src="{{asset('assets/js/main.js')}}"></script>

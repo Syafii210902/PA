@@ -38,17 +38,18 @@
                         <td>{{ $lomba->tingkat }}</td>
                         <td>{{ $lomba->deadline }}</td>
                         <td>{{ $lomba->info }}</td>
-                        <td><img src="{{ asset('assets/img/'.$lomba->poster) }}" alt="" style="width: 100px;"></td>
+                        <td><img src="{{ asset('storage/'.$lomba->poster) }}" alt="" style="width: 100px;"></td>
                         <td>
                         <a href="" data-toggle="modal" data-target="#modalEdit-{{ $lomba->id }}" style="font-size: 20px; margin-left: 10px;"><i class="fa fa-edit"></i></a>
-                        <a href="" style="font-size: 20px; margin-left: 10px;"><i class="fa fa-trash"></i></a>
+                        <a href="/admin/lomba/delete/{{ $lomba->id }}" style="font-size: 20px; margin-left: 10px;"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     <section>
                       <!-- Modal -->
                       <div class="modal fade" id="modalEdit-{{ $lomba->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
-                              <form action="">
+                              <form action="/admin/lomba/edit" method="POST" enctype="multipart/form-data">
+                                @csrf
                                   <div class="modal-content">
                                       <div class="modal-header">
                                       <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
@@ -58,23 +59,26 @@
                                       </div>
                                       <div class="modal-body">
                                           <div class="mb-3">
+                                              <input type="hidden" name="lomba_id" value="{{ $lomba->id }}">
                                               <label for="namalomba" class="col-form-label">Nama</label>
-                                              <input type="text" class="form-control" value="{{ $lomba->nama_lomba }}" id="namalomba" name="namalomba">
+                                              <input type="text" class="form-control" value="{{ $lomba->nama_lomba }}" id="namalomba" name="namalomba" required>
                                               <label for="deskripsi" class="col-form-label">Deskripsi</label>
-                                              <textarea type="text" style="height: 150px" class="form-control" id="deskripsi" name="deskripsi">{{ $lomba->deskripsi }}</textarea>
+                                              <textarea type="text" style="height: 150px" class="form-control" id="deskripsi" name="deskripsi" required>{{ $lomba->deskripsi }}</textarea>
                                               <label for="tingkat" class="col-form-label">Tingkat</label>
-                                              <input type="text" class="form-control" value="{{ $lomba->tingkat }}" id="tingkat" name="tingkat">
+                                              <input type="text" class="form-control" value="{{ $lomba->tingkat }}" id="tingkat" name="tingkat" required>
+                                              <label for="tahun" class="col-form-label">Tahun</label>
+                                              <input type="text" class="form-control" value="{{ $lomba->tahun }}" id="tahun" name="tahun" required>
                                               <label for="deadline" class="col-form-label">Deadline</label>
-                                              <input type="date" class="form-control" value="{{ $lomba->deadline }}" id="deadline" name="deadline">
+                                              <input type="date" class="form-control" value="{{ $lomba->deadline }}" id="deadline" name="deadline" required>
                                               <label for="info" class="col-form-label">Info</label>
-                                              <input type="text" class="form-control" value="{{ $lomba->info }}" id="info" name="info">
+                                              <input type="text" class="form-control" value="{{ $lomba->info }}" id="info" name="info" required>
                                               <label for="poster" class="col-form-label">Poster</label>
                                               <input type="file" class="form-control" value="{{ $lomba->poster }}" id="poster" name="poster">
                                           </div>
                                       </div>
                                       <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-primary">Save changes</button>
+                                      <button type="submit" class="btn btn-primary">Save changes</button>
                                       </div>
                                   </div>
                               </form>

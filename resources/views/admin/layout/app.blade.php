@@ -10,7 +10,7 @@
   <title>ADMIN | {{ $tittle }}</title>
 	
   <!-- Favicons-->
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
   <link rel="apple-touch-icon" type="image/x-icon" href="{{ asset('adm/img/apple-touch-icon-57x57-precomposed.png') }}">
   <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{{ asset('adm/img/apple-touch-icon-72x72-precomposed.png') }}">
   <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{{ asset('adm/img/apple-touch-icon-114x114-precomposed.png') }}">
@@ -33,10 +33,14 @@
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">
-
-    @include('admin.layout.nav')
-    @yield('content')
-    @include('admin.layout.footer')
+  @if ($tittle != "Admin Login")
+  @include('admin.layout.nav')
+  @yield('content')
+  @include('admin.layout.footer')
+  @else
+    @yield('adminlogin')
+  @endif
+    
 
 </body>
 

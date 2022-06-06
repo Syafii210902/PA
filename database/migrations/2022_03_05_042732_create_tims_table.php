@@ -19,7 +19,7 @@ class CreateTimsTable extends Migration
             $table->foreignId('user_id');
             $table->string('nama_tim');
             $table->integer('jumlah_anggota');
-            $table->string('bidang');
+            $table->string('bidang')->nullable()->default(NULL);
             $table->text('requirement');
             $table->timestamps();
         });

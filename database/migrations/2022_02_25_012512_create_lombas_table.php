@@ -19,6 +19,7 @@ class CreateLombasTable extends Migration
             $table->string('nama_lomba');
             $table->text('deskripsi');
             $table->string('tingkat');
+            $table->integer('tahun');
             $table->date('deadline');
             $table->string('poster');
             $table->string('info');

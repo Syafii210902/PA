@@ -7,6 +7,10 @@ use App\Models\KategoriKegiatan;
 use App\Http\Requests\StoreKegiatanRequest;
 use App\Http\Requests\UpdateKegiatanRequest;
 use App\Models\DivisiKegiatan;
+use App\Models\JoinDivisi;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KegiatanController extends Controller
 {
@@ -91,5 +95,30 @@ class KegiatanController extends Controller
     public function destroy(Kegiatan $kegiatan)
     {
         //
+    }
+
+    public function joinDivisi(Request $request)
+    {
+        $request->validate([
+            'no_wa'     => 'required'
+        ]);
+
+        $joinDivisi = JoinDivisi::create([
+            'user_id' => Auth::user()->id,
+            'divisi_id' => $request->pilihan1,
+            'pilihan1' => DivisiKegiatan::find($request->pilihan1)->nama_kegiatan,
+            'pilihan2' => DivisiKegiatan::find($request->pilihan2)->nama_kegiatan,
+            'status1' => '0',
+            'status2' => '0',
+            'no_wa' => $request->no_wa
+        ]);
+
+        if($joinDivisi){
+             //redirect dengan pesan sukses
+             return redirect()->back()->with(['success' => 'Data Berhasil Disimpan!']);
+        }else{
+             //redirect dengan pesan error
+             return redirect()->back()->with(['error' => 'Data Gagal Disimpan!']);
+        }
     }
 }

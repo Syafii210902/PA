@@ -51,7 +51,7 @@
                                     <div class="col-lg-3 col-md-6 app" data-aos="zoom-in">
                                         <a href="/lomba/{{$lombas[$i]->id}}">
                                             <div class="lomba-box">
-                                                <img src="{{asset('assets/img/'.$lombas[$i]->poster)}}" alt="">
+                                                <img src="{{asset('storage/'.$lombas[$i]->poster)}}" alt="">
                                                 <div class="desc">
                                                     <h3>{{$lombas[$i]->nama_lomba}}</h3>
                                                     <p>{{$lombas[$i]->deadline}}</p>
@@ -78,9 +78,9 @@
                             <div class="row">
                                 @for($i=0;$i<4;$i++)
                                     <div class="col-lg-3 col-md-6 app" data-aos="zoom-in">
-                                        <a href="">
+                                        <a href="/kegiatan/{{$kgts[$i]->kategori->nama_kategori.'/'.$kgts[$i]->id}}">
                                             <div class="kegiatan-box">
-                                                <img src="{{asset('assets/img/'.$kgts[$i]->poster)}}" alt="">
+                                                <img src="{{asset('storage/'.$kgts[$i]->poster)}}" alt="">
                                                 <div class="desc">
                                                     <h3>{{$kgts[$i]->nama_kegiatan}}</h3>
                                                     <p>{{$kgts[$i]->deadline}}</p>
@@ -174,7 +174,7 @@
                                 <h4 class="tittle">{{ $juara_tims[$i]->tim->lomba->nama_lomba }}</h4>
                                 <div class="row" style="margin-bottom: 10px">
                                     <div class="col-3" style="padding: 0 10px 0 20px">
-                                        <img src="{{asset('assets/img/pp.jpg')}}" alt="juara">
+                                        <img src="{{is_null($juara_tims[$i]->tim->user->image) ? asset('assets/img/pp.png') : asset('storage/'.$juara_tims[$i]->tim->user->image)}}" alt="juara">
                                     </div>
                                     <div class="col-9" style="margin: auto 0; font-size: 14px;">
                                         <a href="/profile/{{ $juara_tims[$i]->tim->user->username }}">{{ $juara_tims[$i]->tim->user->username }}</a>
@@ -183,7 +183,7 @@
                                 @for ($j=0; $j<$juara_tims[$i]->tim->jumlah_anggota; $j++)
                                 <div class="row" style="margin-bottom: 10px">
                                     <div class="col-3" style="padding: 0 10px 0 20px">
-                                        <img src="{{asset('assets/img/pp.jpg')}}" alt="juara">
+                                        <img src="{{is_null($juara_tims[$i]->tim->users[$j]->image) ? asset('assets/img/pp.png') : asset('storage/'.$juara_tims[$i]->tim->users[$j]->image)}}" alt="juara">
                                     </div>
                                     <div class="col-9" style="margin: auto 0; font-size: 14px;">
                                         <!-- belum ditambahkan kondisi untuk menampilkan yg berstatus 1 saja -->
@@ -199,7 +199,7 @@
                                 <h4 class="tittle">{{ $juara_individus[$i]->lomba->nama_lomba }}</h4>
                                 <div class="row">
                                     <div class="col-3" style="padding: 0 10px 0 20px">
-                                        <img src="{{asset('assets/img/pp.jpg')}}" alt="juara">
+                                        <img src="{{is_null($juara_individus[$i]->user->image) ? asset('assets/img/pp.png') : asset('storage/'.$juara_individus[$i]->user->image)}}" alt="juara">
                                     </div>
                                     <div class="col-9" style="margin: auto 0; font-size: 14px;">
                                         <a href="/profile/{{ $juara_individus[$i]->user->username }}">{{ $juara_individus[$i]->user->username }}</a>

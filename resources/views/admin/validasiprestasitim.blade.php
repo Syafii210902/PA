@@ -29,7 +29,7 @@
                   <th>Prestasi</th>
                   <th>Tahun</th>
                   <th>Sertifikat</th>
-                  <th>Action</th>
+                  <th>Validate</th>
                 </tr>
               </thead>
               <tbody>
@@ -37,25 +37,29 @@
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $prestasiTim->tim->nama_tim }}</td>
-                        <td>{{ $prestasiTim->tim->user->username }}</td>
+                        <td>{{ $prestasiTim->tim->user->mahasiswa->full_name }}</td>
                         <td>
-                          <?php ?>
-                          @foreach ($prestasiTim->where('status','1')->orWhere('tim.users.tim_id',$prestasiTim->tim->id) as $anggota)
-                          <ul style="padding: 0">{{ $anggota->user->mahasiswa->full_name }}</ul>
+                          <?php 
+                            $pt = $prestasiTim->tim->users->where('pivot.status', '1')->where('pivot.tim_id', $prestasiTim->tim->id);
+                          ?>
+                          @foreach ($pt as $data)
+                            <ul style="padding: 0">{{ $data->mahasiswa->full_name }}</ul>
                           @endforeach
+                          
+                          
                         </td>
                         <td>{{ $prestasiTim->tim->lomba->nama_lomba }}</td>
                         <td>{{ $prestasiTim->tim->bidang }}</td>
                         <td>{{ $prestasiTim->keterangan }}</td>
                         <td>{{ $prestasiTim->tahun }}</td>
-                        <td><img src="{{ asset('assets/img/'.$prestasiTim->sertifikat) }}" alt="" style="width: 100px;"></td>
+                        <td><img src="{{ asset('storage/'.$prestasiTim->sertifikat) }}" alt="" style="width: 100px;"></td>
                         <td>
                           <div class="switchToggle">
-                            <input type="checkbox" id="switchvalidasitim" {{ ($prestasiTim->status === 1) ? 'checked' : ''}}>
-                            <label for="switch1">Toggle</label>
+                            <input type="checkbox" id="switch{{ $loop->index + 1 }}" {{ ($prestasiTim->status === 1) ? 'checked' : ''}}>
+                            <label for="switch{{ $loop->index + 1 }}">Toggle</label>
                           </div>
                         </td>
-                      </tr>
+                    </tr>
                   @endforeach
                 
               </tbody>

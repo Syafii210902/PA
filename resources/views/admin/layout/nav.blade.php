@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="/admin/">
+          <a class="nav-link" href="/admin/dashboard">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
@@ -47,7 +47,15 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseprestasi">
             <li>
-              <a href="/admin/prestasi/list">List Prestasi</a>
+              <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapselist" data-parent="list">List</a>
+              <ul class="sidenav-third-level collapse" id="collapselist">
+                <li>
+                  <a href="/admin/prestasi/individu/list">Individu</a>
+                </li>
+                <li>
+                  <a href="/admin/prestasi/kelompok/list">Kelompok</a>
+                </li>
+              </ul>
             </li>
             <li>
               <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsevalidasi" data-parent="validasi">Validasi</a>
@@ -56,14 +64,14 @@
                   <a href="/admin/prestasi/validasi/individu">Individu</a>
                 </li>
                 <li>
-                  <a href="/admin/prestasi/validasi/kelompok">Tim</a>
+                  <a href="/admin/prestasi/validasi/kelompok">kelompok</a>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My profile">
-          <a class="nav-link" href="user-profile.html">
+          <a class="nav-link" href="/admin/profile">
             <i class="fa fa-fw fa-user"></i>
             <span class="nav-link-text">My Profile</span>
           </a>
@@ -173,7 +181,7 @@
           </form>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          <a class="nav-link" href="/admin/logout">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>

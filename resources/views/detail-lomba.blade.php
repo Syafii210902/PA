@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8" data-aos="fade-up">
-                    <img src="{{asset('assets/img/'.$lomba->poster)}}" alt="">
+                    <img src="{{asset('storage/'.$lomba->poster)}}" alt="">
                     <h4>{{ $lomba->nama_lomba }}</h4>
                     <h5>Deskripsi</h5>
                     <p>{{ $lomba->deskripsi }}</p>
@@ -17,15 +17,17 @@
                 </div>
                 <div class="col-lg-4 form-box" data-aos="fade-up">
                     <h3>Create Team</h3>
-                    <form action="" method="post">
+                    <form action="{{ url('createteam') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="lomba_id" value="{{ $lomba->id }}">
                         <p>Nama Tim</p>
-                        <input type="text" name="nama-tim" placeholder="Nama Tim">
+                        <input type="text" name="nama_tim" placeholder="Nama Tim" required>
                         <p>Kategori lomba</p>
-                        <input type="text" name="kategori lomba" placeholder="Kategori Lomba">
+                        <input type="text" name="kategori_lomba" placeholder="Kategori Lomba">
                         <p>Jumlah Anggota</p>
-                        <input type="text" name="jumlah-anggota" placeholder="Jumlah anggota">
+                        <input type="text" name="jumlah_anggota" placeholder="Jumlah anggota" required>
                         <p>Requirements</p>
-                        <textarea name="requirements" rows="5" placeholder="Requirements skill"></textarea>
+                        <textarea name="requirements" rows="5" placeholder="Requirements skill" required></textarea>
                         <input type="submit">
                     </form>
                 </div>
@@ -69,7 +71,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <a href="#" class="join"data-bs-toggle="modal" data-bs-target="#staticBackdrop">Join</a>
+                                                <a href="" class="join" data-bs-toggle="modal" data-bs-target="#joinTeam{{ $tim->id }}">Join</a>
                                             </div>
                                         </div>
                                     </div>
@@ -84,28 +86,30 @@
 
     </section>
 
-    <section>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">Join Team</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="whatsapp-no" class="col-form-label">No. Whatsapp:</label>
-                            <input type="text" class="form-control" id="whatsapp-no">
+    @foreach ($tims as $tim)
+            <div class="modal fade" id="joinTeam{{ $tim->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Join Team</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ url('jointeam') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <input type="hidden" name="tim_id" value="{{ $tim->id }}">
+                                <label for="no_wa" class="col-form-label">No. Whatsapp:</label>
+                                <input type="text" class="form-control" name="no_wa" id="no_wa">
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-              </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
             </div>
-          </div>
-    </section>
+    @endforeach
     <!-- End Detail Lomba -->
 @endsection

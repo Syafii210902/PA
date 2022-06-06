@@ -17,7 +17,7 @@ class JuaraTimController extends Controller
     {
         return view('juara-tim', [
             "tittle" => "Juara",
-            "juara_tims" => JuaraTim::with('tim')->where('type', 'publish')->latest()->get()
+            "juara_tims" => JuaraTim::with('tim')->where('status', '1')->where('type', 'publish')->latest()->get()
         ]);
     }
 

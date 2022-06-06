@@ -12,7 +12,7 @@
                             <h4 class="tittle">{{ $juara_individu->lomba->nama_lomba }}</h4>
                             <div class="row">
                                 <div class="col-3" style="padding: 0 10px 0 20px">
-                                    <img src="{{asset('assets/img/pp.jpg')}}" alt="juara">
+                                    <img src="{{is_null($juara_individu->user->image) ? asset('assets/img/pp.png') : asset('storage/'.$juara_individu->user->image)}}" alt="juara">
                                 </div>
                                 <div class="col-9" style="margin: auto 0; font-size: 14px;">
                                     <a href="/profile/{{ $juara_individu->user->username }}">{{ $juara_individu->user->username }}</a>

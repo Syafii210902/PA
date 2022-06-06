@@ -18,9 +18,10 @@ class CreateJoinDivisisTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('divisi_id');
             $table->string('pilihan1');
-            $table->string('pilihan2');
+            $table->string('pilihan2')->nullable()->default(NULL);
             $table->integer('status1');
             $table->integer('status2');
+            $table->string('no_wa');
             $table->timestamps();
         });
     }

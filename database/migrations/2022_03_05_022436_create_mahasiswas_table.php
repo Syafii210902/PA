@@ -16,11 +16,13 @@ class CreateMahasiswasTable extends Migration
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('full_name')->nullable();
-            $table->string('nrp')->nullable();
-            $table->string('kelas')->nullable();
-            $table->string('jurusan')->nullable();
-            $table->string('bio')->nullable();
+            $table->foreignId('program_id');
+            $table->foreignId('jurusan_id');
+            $table->string('full_name');
+            $table->string('nrp');
+            $table->string('kelas');
+            $table->string('paralel');
+            $table->string('bio')->nullable()->default(NULL);
             $table->timestamps();
         });
     }

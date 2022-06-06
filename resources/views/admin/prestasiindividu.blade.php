@@ -8,6 +8,9 @@
         <li class="breadcrumb-item">
           <a href="#">Prestasi</a>
         </li>
+        <li class="breadcrumb-item">
+          <a href="#">individu</a>
+        </li>
         <li class="breadcrumb-item active">List</li>
       </ol>
 		<!-- Example DataTables Card-->
@@ -22,11 +25,13 @@
                   <th>No</th>
                   <th>NRP</th>
                   <th>Nama</th>
+                  <th>Prodi</th>
+                  <th>Jurusan</th>
+                  <th>Kelas</th>
                   <th>Nama Lomba</th>
                   <th>Kategori</th>
                   <th>Prestasi</th>
                   <th>Tahun</th>
-                  <th>Sertifikat</th>
                 </tr>
               </thead>
               <tbody>
@@ -35,11 +40,13 @@
                         <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $prestasi->user->mahasiswa->nrp }}</td>
                         <td>{{ $prestasi->user->mahasiswa->full_name }}</td>
+                        <td>{{ $prestasi->user->mahasiswa->program->programstudi }}</td>
+                        <td>{{ $prestasi->user->mahasiswa->jurusan->namajurusan }}</td>
+                        <td>{{ $prestasi->user->mahasiswa->kelas }}</td>
                         <td>{{ $prestasi->lomba->nama_lomba }}</td>
                         <td>{{ $prestasi->bidang }}</td>
                         <td>{{ $prestasi->keterangan }}</td>
                         <td>{{ $prestasi->tahun }}</td>
-                        <td><img src="{{ asset('assets/img/'.$prestasi->sertifikat) }}" alt="" style="width: 100px;"></td>
                     </tr>
                   @endforeach
                 

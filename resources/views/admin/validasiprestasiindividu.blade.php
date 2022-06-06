@@ -23,6 +23,8 @@
                   <th>No</th>
                   <th>NRP</th>
                   <th>Nama</th>
+                  <th>Prodi</th>
+                  <th>Jurusan</th>
                   <th>Kelas</th>
                   <th>Nama Lomba</th>
                   <th>Kategori</th>
@@ -38,16 +40,21 @@
                         <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $prestasiIndividu->user->mahasiswa->nrp }}</td>
                         <td>{{ $prestasiIndividu->user->mahasiswa->full_name }}</td>
+                        <td>{{ $prestasiIndividu->user->mahasiswa->program->programstudi }}</td>
+                        <td>{{ $prestasiIndividu->user->mahasiswa->jurusan->namajurusan }}</td>
                         <td>{{ $prestasiIndividu->user->mahasiswa->kelas }}</td>
                         <td>{{ $prestasiIndividu->lomba->nama_lomba }}</td>
                         <td>{{ $prestasiIndividu->bidang }}</td>
                         <td>{{ $prestasiIndividu->keterangan }}</td>
                         <td>{{ $prestasiIndividu->tahun }}</td>
-                        <td><img src="{{ asset('assets/img/'.$prestasiIndividu->sertifikat) }}" alt="" style="width: 100px;"></td>
+                        <td><img src="{{ asset('storage/'.$prestasiIndividu->sertifikat) }}" alt="" style="width: 100px;"></td>
                         <td>
                           <div class="switchToggle">
-                            <input type="checkbox" id="switchvalidasiindividu" {{ ($prestasiIndividu->status === 1) ? 'checked' : ''}}>
-                            <label for="switch1">Toggle</label>
+                            <select name="status[]" id="status">
+                              <option value="0" selected>No</option>
+                              <option value="1" {{ ($prestasiIndividu->status === 1) ? 'selected' : ''}}>Yes</option>
+                              <input type="hidden" name="user_id[]" value="{{ $prestasiIndividu->user->id }}">
+                          </select>
                           </div>
                         </td>
                     </tr>

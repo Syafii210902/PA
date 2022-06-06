@@ -29,7 +29,7 @@
                             </div>
                             <div class="body-card">
                                 <h4>USER INFORMATION</h4>
-                                <form action="" method="post">
+                                <form action="" method="">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <p>Username</p>
@@ -49,11 +49,11 @@
                                         </div>
                                         <div class="col-md-6">
                                             <p>Kelas</p>
-                                            <input type="text" name="kelas" value="{{ $user[0]->mahasiswa->kelas }}" readonly>
+                                            <input type="text" name="kelas" value="{{ $user[0]->mahasiswa->kelas }} {{ $user[0]->mahasiswa->program->programstudi }} {{ $user[0]->mahasiswa->jurusan->alias }} {{ $user[0]->mahasiswa->paralel }}" readonly>
                                         </div>
                                         <div class="col-md-6">
                                             <p>Jurusan</p>
-                                            <input type="text" name="jurusan" value="{{ $user[0]->mahasiswa->jurusan }}" readonly>
+                                            <input type="text" name="jurusan" value="{{ $user[0]->mahasiswa->jurusan->namajurusan }}" readonly>
                                         </div>
                                         <div class="col-12">
                                             <p>About</p>
@@ -70,25 +70,16 @@
                                           <h5 class="modal-title" id="staticBackdropLabel">Account</h5>
                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <form>
+                                        <form action="/updateaccount" method="POST" enctype="multipart/form-data">
+                                            @csrf
                                             <div class="modal-body">
                                                 <div class="mb-3">
                                                     <label for="username" class="col-form-label">Username</label>
-                                                    <input type="text" class="form-control" value="{{ $user[0]->username }}" id="username">
+                                                    <input type="text" class="form-control" value="{{ $user[0]->username }}" name="username" id="username">
                                                     <label for="email" class="col-form-label">Email</label>
-                                                    <input type="email" class="form-control" value="{{ $user[0]->email }}" id="email">
-                                                    <label for="fullname" class="col-form-label">Full Name</label>
-                                                    <input type="text" class="form-control" value="{{ $user[0]->mahasiswa->full_name }}" id="fullname">
-                                                    <label for="nrp" class="col-form-label">NRP</label>
-                                                    <input type="text" class="form-control" value="{{ $user[0]->mahasiswa->nrp }}" id="nrp">
-                                                    <label for="kelas" class="col-form-label">Kelas</label>
-                                                    <input type="text" class="form-control" value="{{ $user[0]->mahasiswa->kelas }}" id="kelas">
-                                                    <label for="jurusan" class="col-form-label">Jurusan</label>
-                                                    <input type="text" class="form-control" value="{{ $user[0]->mahasiswa->jurusan }}" id="jurusan">
+                                                    <input type="email" class="form-control" value="{{ $user[0]->email }}" name="email" id="email">
                                                     <label for="desc" class="col-form-label">About</label>
-                                                    <input type="text" class="form-control" value="{{ $user[0]->mahasiswa->bio }}" id="desc">
-                                                    <label for="photoprofile" class="col-form-label">Photo Profile</label>
-                                                    <input type="file" class="form-control" name="photoprofile" id="photoprofile" required>
+                                                    <input type="text" class="form-control" value="{{ $user[0]->mahasiswa->bio }}" name="bio" id="desc">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -115,11 +106,19 @@
                             </div>
                             <div class="body-card">
                                 <div class="row">
-                                    <div class="col-10">
-                                        <p>This is your profile page. You can set your profile to make other people know about
+                                    <div class="col-11">
+                                        @if($prestasis->count() == 0)
+                                            <p>This is your profile page. You can set your profile to make other people know about
                                             you and your experience.</p>
+                                        @endif
+                                        @foreach($prestasis as $prestasi)
+                                            <p>{{ $prestasi->keterangan }} {{ $prestasi->bidang }} - {{ $prestasi->lomba->nama_lomba }} {{ $prestasi->tahun }}</p>
+                                        @endforeach
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-1">
+                                        @foreach($prestasis as $prestasi)
+                                            <a href="" style="font-size: 25px; color: #7a7a7a;"><i class='bx bxs-edit-alt'></i></a>
+                                        @endforeach
                                         
                                     </div>
                                 </div>
@@ -135,19 +134,20 @@
                                   <h5 class="modal-title" id="staticBackdropLabel">Prestasi</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form>
+                                <form method="POST" action="{{ url('addprestasi') }}" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <label for="nama-lomba" class="col-form-label">Nama Lomba</label>
-                                            <input type="text" class="form-control" id="nama-lomba" required>
+                                            <input type="text" class="typehead form-control" id="nama_lomba" name="nama_lomba" required>
                                             <label for="kategori" class="col-form-label">Kategori</label>
-                                            <input type="text" class="form-control" id="kategori">
+                                            <input type="text" class="form-control" id="kategori" name="kategori">
                                             <label for="prestasi" class="col-form-label">Prestasi</label>
-                                            <input type="text" class="form-control" id="prestasi" required>
+                                            <input type="text" class="form-control" id="prestasi" name="prestasi" required>
                                             <label for="tingkat" class="col-form-label">Tingkat</label>
-                                            <input type="text" class="form-control" id="tingkat" required>
+                                            <input type="text" class="form-control" id="tingkat" name="tingkat" required>
                                             <label for="tahun" class="col-form-label">Tahun</label>
-                                            <input type="text" class="form-control" id="tahun" required>
+                                            <input type="text" class="form-control" id="tahun" name="tahun" required>
                                             <label for="sertifikat" class="col-form-label">Sertifikat</label>
                                             <input type="file" class="form-control" name="sertifikat" id="sertifikat" required>
                                         </div>
@@ -175,16 +175,20 @@
                             </div>
                             <div class="body-card">
                                 <div class="row">
-                                    <div class="col-10">
-                                        <p>This is your profile page. You can set your profile to make other people know about
+                                    <div class="col-11">
+                                        @if($pengalamans->count() == 0)
+                                            <p>This is your profile page. You can set your profile to make other people know about
                                             you and your experience.</p>
+                                        @endif
                                         @foreach($pengalamans as $pengalaman)
-                                            <p><strong>{{ $pengalaman->jabatan }} - {{ $pengalaman->nama_kegiatan }} {{ $pengalaman->tahun }}</strong></p>
+                                            <p>{{ $pengalaman->jabatan }} - {{ $pengalaman->nama_kegiatan }} {{ $pengalaman->tahun }}</p>
                                         @endforeach
                                     </div>
-                                    <div class="col-2">
-                                        <a href=""><img src="assets/img/icon-edit.png" alt=""></a>
-                                        <a href=""><img src="assets/img/icon-edit.png" alt=""></a>
+                                    <div class="col-1">
+                                        @foreach($pengalamans as $pengalaman)
+                                        <a href="" style="font-size: 25px; color: #7a7a7a;"><i class='bx bxs-edit-alt'></i></a>
+                                        @endforeach
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -198,15 +202,16 @@
                                   <h5 class="modal-title" id="staticBackdropLabel">Pengalaman</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form>
+                                <form method="POST" action="{{ url('addpengalaman') }}">
+                                    @csrf
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label for="nama-kegiatan" class="col-form-label">Nama Kegiatan</label>
-                                            <input type="text" class="form-control" id="nama-kegiatan">
+                                            <label for="nama_kegiatan" class="col-form-label">Nama Kegiatan</label>
+                                            <input type="text" class="form-control" name="nama_kegiatan" id="nama-kegiatan" required>
                                             <label for="jabatan" class="col-form-label">Jabatan</label>
-                                            <input type="text" class="form-control" id="jabatan">
+                                            <input type="text" class="form-control" name="jabatan" id="jabatan" required>
                                             <label for="tahun" class="col-form-label">Tahun</label>
-                                            <input type="text" class="form-control" id="tahun">
+                                            <input type="text" class="form-control" name="tahun" id="tahun" required>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -222,7 +227,7 @@
                             <div class="top-card">
                                 <div class="row">
                                     <div class="col-6">
-                                        <form method="get">
+                                        <form method="get" action="/profile/{{ $user[0]->username }}">
                                             <select id="select_tim" name="select_tim" onchange="this.form.submit()">
                                                 <option disabled selected><h3>Select Team</h3></option>
                                                 @foreach($tims as $tim)
@@ -248,27 +253,38 @@
                             </div>
                             <div class="grup">
                                 @if ($selected_id ==! null)
-                                    @foreach($tims->find($selected_id)->users as $anggota)
-                                        <div class="body-card item-group" style="background-color: #fff;">
-                                            <div class="row">
-                                                <div class="col-1" style="margin: auto 0;">
-                                                    <img src="{{asset('assets/img/pp.jpg')}}" alt="">
-                                                </div>
-                                                <div class="col-4" style="margin: auto 0">
-                                                    <a href="">{{ $anggota->username }}</a>
-                                                </div>
-                                                <div class="col-4 text-center" style="margin: auto 0;">
-                                                    <p>{{ $anggota->pivot->no_wa }}</p>
-                                                </div>
-                                                <div class="col-3 text-center" style="margin: auto 0;">
-                                                    <div class="switchToggle">
-                                                        <input type="checkbox" id="switch1" {{ ($anggota->pivot->status === 1) ? 'checked' : ''}}>
-                                                        <label for="switch1">Toggle</label>
+                                    <form method="post" action="{{ url('profile') }}" enctype="multipart/form-data">
+                                        <input type="hidden" name="tim_id" value="{{ $selected_id }}">
+                                        @csrf
+                                        @foreach($tims->find($selected_id)->users as $anggota)
+                                            <div class="body-card item-group" style="background-color: #fff;">
+                                                <div class="row">
+                                                    <div class="col-1" style="margin: auto 0;">
+                                                        <img src="{{is_null($anggota->image) ? asset('assets/img/pp.png') : asset('storage/'.$anggota->image)}}" alt="">
+                                                    </div>
+                                                    <div class="col-4" style="margin: auto 0">
+                                                        <a href="">{{ $anggota->mahasiswa->full_name }}</a>
+                                                    </div>
+                                                    <div class="col-4 text-center" style="margin: auto 0;">
+                                                        <p>{{ $anggota->pivot->no_wa }}</p>
+                                                    </div>
+                                                    <div class="col-3 text-center" style="margin: auto 0;">
+                                                        <div class="switchToggle">
+                                                            <select name="status[]" id="status">
+                                                                <option value="0" selected>No</option>
+                                                                <option value="1" {{ ($anggota->pivot->status === 1) ? 'selected' : ''}}>Yes</option>
+                                                                <input type="hidden" name="user_id[]" value="{{ $anggota->id }}">
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        @endforeach
+                                        <div class="d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
-                                    @endforeach
+                                        
+                                    </form>
                                 @endif
                                 
                             </div>
@@ -278,11 +294,11 @@
                 <div class="col-lg-4">
                     <div class="bio">
                         <div class="bio-box">
-                            <img src="{{url(Auth::user()->image ?? 'assets/img/pp.png')}}" alt="">
+                            <img src={{ is_null($user[0]->image) ? asset('assets/img/pp.png') : asset('storage/' . $user[0]->image)}} alt="" data-bs-toggle="modal" data-bs-target="#modalimage" style="cursor: pointer;">
                             <p style="font-weight: 600; font-size: 24px;">{{ $user[0]->mahasiswa->full_name }}</p>
                             <p>{{ $user[0]->mahasiswa->nrp }}</p>
-                            <p>{{ $user[0]->mahasiswa->kelas }}</p>
-                            <p style="text-transform: uppercase; font-weight: bold; font-size: 20px;">{{ $user[0]->mahasiswa->jurusan }}</p>
+                            <p>{{ $user[0]->mahasiswa->kelas }} {{ $user[0]->mahasiswa->program->programstudi }} {{ $user[0]->mahasiswa->jurusan->alias }} {{ $user[0]->mahasiswa->paralel }}</p>
+                            <p style="text-transform: uppercase; font-weight: bold; font-size: 20px;">{{ $user[0]->mahasiswa->jurusan->namajurusan }}</p>
                             <p style="font-size: 18px;">{{ $user[0]->mahasiswa->bio }}</p>
                         </div>
                     </div>
@@ -381,6 +397,30 @@
         </div>
     </section>
     <section>
+        <div class="modal fade" id="modalimage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Photo Profile</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/updateavatar" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="photoprofile" class="col-form-label">Photo Profile</label>
+                            <input type="file" class="form-control" name="photoprofile" id="photoprofile" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+    </section>
+    <section>
         <div class="modal fade" id="modalReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -406,21 +446,22 @@
                   <h5 class="modal-title" id="staticBackdropLabel">Individu</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form method="POST" action="{{ url('addjuaraindividu') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="nama-lomba" class="col-form-label">Nama Lomba</label>
-                            <input type="text" class="form-control" id="nama-lomba" required>
+                            <label for="nama_lomba" class="col-form-label">Nama Lomba</label>
+                            <input type="text" class="form-control" id="nama_lomba" name="nama_lomba" required>
                             <label for="kategori" class="col-form-label">Kategori</label>
-                            <input type="text" class="form-control" id="kategori">
+                            <input type="text" class="form-control" id="kategori" name="kategori">
                             <label for="prestasi" class="col-form-label">Prestasi</label>
-                            <input type="text" class="form-control" id="prestasi" required>
+                            <input type="text" class="form-control" id="prestasi" name="prestasi" required>
                             <label for="tingkat" class="col-form-label">Tingkat</label>
-                            <input type="text" class="form-control" id="tingkat" required>
+                            <input type="text" class="form-control" id="tingkat" name="tingkat" required>
                             <label for="tahun" class="col-form-label">Tahun</label>
-                            <input type="text" class="form-control" id="tahun" required>
+                            <input type="text" class="form-control" id="tahun" name="tahun" required>
                             <label for="sertifikat" class="col-form-label">Sertifikat</label>
-                            <input type="file" class="form-control" id="sertifikat">
+                            <input type="file" class="form-control" id="sertifikat" name="sertifikat" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -439,23 +480,24 @@
                   <h5 class="modal-title" id="staticBackdropLabel">Kelompok</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form method="POST" action="{{ url('addjuarakelompok') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="nama-tim" class="col-form-label">Nama Tim</label>
-                            <input type="text" class="form-control" id="nama-tim" required>
-                            <label for="nama-lomba" class="col-form-label">Nama Lomba</label>
-                            <input type="text" class="form-control" id="nama-lomba" required>
+                            <label for="nama_tim" class="col-form-label">Nama Tim</label>
+                            <input type="text" class="form-control" id="nama_tim" name="nama_tim" required>
+                            <label for="nama_lomba" class="col-form-label">Nama Lomba</label>
+                            <input type="text" class="form-control" id="nama_lomba" name="nama_lomba" required>
                             <label for="kategori" class="col-form-label">Kategori</label>
-                            <input type="text" class="form-control" id="kategori">
+                            <input type="text" class="form-control" id="kategori" name="kategori">
                             <label for="prestasi" class="col-form-label">Prestasi</label>
-                            <input type="text" class="form-control" id="prestasi" required>
+                            <input type="text" class="form-control" id="prestasi" name="prestasi" required>
                             <label for="tingkat" class="col-form-label">Tingkat</label>
-                            <input type="text" class="form-control" id="tingkat" required>
+                            <input type="text" class="form-control" id="tingkat" name="tingkat" required>
                             <label for="tahun" class="col-form-label">Tahun</label>
-                            <input type="text" class="form-control" id="tahun" required>
+                            <input type="text" class="form-control" id="tahun" name="tahun" required>
                             <label for="sertifikat" class="col-form-label">Sertifikat</label>
-                            <input type="file" class="form-control" id="sertifikat">
+                            <input type="file" class="form-control" id="sertifikat" name="sertifikat" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -467,4 +509,27 @@
           </div>
     </section>
     <!-- End Profile -->
+    {{-- <script type="text/javascript">
+    var path = "{{ route('autocomplete') }}";
+    $('input.typehead').typehead({
+        source: function (query, process){
+            return $.get(path,{query: query }, function(data){
+                return process(data);
+            });
+        }
+    });
+</script> --}}
+<script type="text/javascript">
+    // function update(val) {
+    //     check = document.getElementById(val);
+    //     if (check.checked) {
+    //         check.checked = false;
+    //     }
+    //     else{
+    //         check.checked = true;
+    //     }
+        
+    // }
+    
+</script>
 @endsection

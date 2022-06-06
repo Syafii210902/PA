@@ -12,7 +12,7 @@
                                 <div class="col-lg-3 col-md-6 app" data-aos="zoom-in">
                                     <a href="/lomba/{{$lomba->id}}">
                                         <div class="lomba-box">
-                                            <img src="assets/img/{{ $lomba->poster }}" alt="{{ $lomba->nama_lomba }}">
+                                            <img src="storage/{{ $lomba->poster }}" alt="{{ $lomba->nama_lomba }}">
                                             <div class="desc">
                                                 <h3>{{ $lomba->nama_lomba }}</h3>
                                                 <p>{{ $lomba->deadline }}</p>

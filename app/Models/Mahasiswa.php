@@ -13,4 +13,10 @@ class Mahasiswa extends Model
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function program(){
+        return $this->belongsTo(ProgramStudi::class, 'program_id');
+    }
+    public function jurusan(){
+        return $this->belongsTo(Jurusan::class, 'jurusan_id');
+    }
 }
